@@ -1,10 +1,57 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { FaFileWord } from "react-icons/fa";
 function Body() {
   const [selectFile, setSelectFile] = useState(null);
+  const [download, setDownload] = useState("");
+  const [converted, setConverted] = useState("");
+
   const handleButton = (event) => {
     console.log(event.target.files[0]);
     setSelectFile(event.target.files[0]);
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!selectFile) {
+      setConverted("please select a valid file");
+      return;
+    }
+    const formData = new FormData();
+    formData.append("file", selectFile);
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/convertFile",
+        formData,
+        {
+          responseType: "blob",
+        }
+      );
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      console.log(url);
+      const link = document.createElement("a");
+      console.log(link);
+      link.href = url;
+      console.log(link);
+      link.setAttribute(
+        "download",
+        setSelectFile.name.replace(/\.[^/.]+$/, "") + ".pdf"
+      );
+      console.log(link);
+      document.body.appendChild(link);
+      console.log(link);
+      link.click();
+      link.parentNode.removeChild(link);
+      setSelectFile(null);
+      setDownload("");
+      setConverted("File Converted Successfully");
+    } catch (error) {
+      console.log(error);
+      if (error.response && error.response.status == 400) {
+        setDownload("Error occurred: ", error.response.data.message);
+      } else {
+        setConverted("");
+      }
+    }
   };
   return (
     <>
@@ -43,6 +90,12 @@ function Body() {
               >
                 Convert File
               </button>
+              {converted && (
+                <div className="text-green-500 text-center">{converted}</div>
+              )}
+              {download && (
+                <div className="text-red-500 text-center">{download}</div>
+              )}
             </div>
           </div>
         </div>
