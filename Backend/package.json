@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "docx-pdf": "^0.0.1",
     "express": "^4.19.2"
   }
 }
