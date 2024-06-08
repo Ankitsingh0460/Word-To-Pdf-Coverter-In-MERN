@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaFileWord } from "react-icons/fa";
 function Body() {
+  const [selectFile, setSelectFile] = useState(null);
+  const handleButton = (event) => {
+    console.log(event.target.files[0]);
+    setSelectFile(event.target.files[0]);
+  };
   return (
     <>
       <div className="bg-slate-300  max-w-screen-2xl mx:auto container px-6 py-4 md:px-40 ">
@@ -16,6 +21,7 @@ function Body() {
 
             <div className="flex flex-col items-center space-y-4">
               <input
+                onChange={handleButton}
                 type="file"
                 accept=".doc,.docx"
                 className="hidden"
@@ -26,9 +32,15 @@ function Body() {
                 className="w-full flex item-center justify-center px-4 py-6 bg-gray-100 text-gray-700 rounded-lg shadow-lg cursor-pointer boarder-blue-300 hover:bg-blue-700 duration-300  hover:text-white"
               >
                 <FaFileWord className="text-3xl" />
-                <span className="text-3xl mr-2 ">Choose File</span>
+                <span className="text-3xl mr-2 ">
+                  {selectFile ? selectFile.name : "Choose File"}
+                </span>
               </label>
-              <button className="text-white font-bold px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-900 duration-300 ">
+              <button
+                onClick={handleSubmit}
+                disabled={!selectFile}
+                className="text-white font-bold px-4 py-2 rounded-md bg-blue-600 hover:bg-blue-900 duration-300 disabled:bg-slate-200 disabled:pointer-events-none disabled:text-black"
+              >
                 Convert File
               </button>
             </div>
