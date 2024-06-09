@@ -5,9 +5,11 @@ import Navbar from "./component/Navbar";
 function App() {
   return (
     <>
-      <Navbar />
-      <Body />
-      <Footer />
+      <div className=" dark:bg-slate-900 dark:text-white">
+        <Navbar />
+        <Body />
+        <Footer />
+      </div>
     </>
   );
 }
