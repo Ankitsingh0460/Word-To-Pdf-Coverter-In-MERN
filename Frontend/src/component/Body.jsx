@@ -27,18 +27,18 @@ function Body() {
         }
       );
       const url = window.URL.createObjectURL(new Blob([response.data]));
-      console.log(url);
+
       const link = document.createElement("a");
-      console.log(link);
+
       link.href = url;
-      console.log(link);
+
       link.setAttribute(
         "download",
         setSelectFile.name.replace(/\.[^/.]+$/, "") + ".pdf"
       );
-      console.log(link);
+
       document.body.appendChild(link);
-      console.log(link);
+
       link.click();
       link.parentNode.removeChild(link);
       setSelectFile(null);
