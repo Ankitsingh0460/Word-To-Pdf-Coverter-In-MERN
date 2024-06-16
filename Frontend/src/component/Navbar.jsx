@@ -4,7 +4,7 @@ function Navbar() {
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
-  console.log(theme);
+  //them
   const element = document.documentElement;
   useEffect(() => {
     if (theme === "dark") {
