@@ -57,7 +57,7 @@ function Body() {
     <>
       <div className="bg-slate-300  max-w-screen-2xl mx:auto container px-6 py-4 md:px-40  dark:bg-slate-900 dark:text-white ">
         <div className=" flex h-screen items-center justify-center ">
-          <div className="border-2 border-dashed px-4 py-2 md:px-8 py-6 border-indigo-400 rounded-lg shadow-lg">
+          <div className="border-2 border-dashed px-4 py-2 md:px-8 py-6 border-indigo-400 rounded-lg shadow-lg   dark:bg-slate-900 dark:text-white text-black">
             <h1 className="text-3xl text-center font-bold mb-4">
               Convert Word To PDF Online{" "}
             </h1>
